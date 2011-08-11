@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  android:orientation="vertical"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent">
+    <Button android:id="@+id/startBtn" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="Start Game"></Button>
+    <Button android:id="@+id/settingBtn" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="Settings"></Button>
+    <Button android:id="@+id/instructBtn" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="Instructions"></Button>
+	<Button android:id="@+id/aboutBtn" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="About"></Button>
+</LinearLayout>

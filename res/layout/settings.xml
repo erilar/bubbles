@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:orientation="vertical" android:layout_width="match_parent"
+	android:layout_height="match_parent">
+	<RadioGroup android:orientation="horizontal"
+		android:layout_width="fill_parent" android:layout_height="50dp"
+		android:id="@+id/groupSound">
+		<RadioButton android:text="Sound on" android:id="@+id/soundOnRadio"
+			android:layout_width="wrap_content" android:layout_height="wrap_content"></RadioButton>
+		<RadioButton android:text="Sound off" android:id="@+id/soundOffRadio"
+			android:layout_width="wrap_content" android:layout_height="wrap_content"></RadioButton>
+	</RadioGroup>
+	<RadioGroup android:orientation="horizontal"
+		android:layout_width="fill_parent" android:layout_height="50dp"
+		android:id="@+id/groupVibrate">
+		<RadioButton android:text="Vibration on" android:id="@+id/vibrateOnRadio"
+			android:layout_width="wrap_content" android:layout_height="wrap_content"></RadioButton>
+		<RadioButton android:text="Vibration off" android:id="@+id/vibrateOffRadio"
+			android:layout_width="wrap_content" android:layout_height="wrap_content"></RadioButton>
+	</RadioGroup>
+</LinearLayout>
