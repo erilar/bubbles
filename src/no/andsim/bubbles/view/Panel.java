@@ -1,7 +1,6 @@
 package no.andsim.bubbles.view;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import no.andsim.bubbles.activity.R;
@@ -22,65 +21,67 @@ import android.view.SurfaceView;
 
 public class Panel extends SurfaceView implements SurfaceHolder.Callback {
 
-	private List<Element> mElements = Collections.synchronizedList(new ArrayList<Element>());
+	private List<Element> mElements = new ArrayList<Element>();
+
+	private List<Element> dElements = new ArrayList<Element>();
 
 	private ViewThread mThread;
 
 	public static int mWidth;
 	public static int mHeight;
 
-	private int mElementNumber = 0;
-	private int destroyedNumber = 0;
+	private int alive = 0;
 
-	private int highScore;
-	private int alive;
-	
+	private int highScore = 0;
+
 	private MediaPlayer highScoreSound;
-	
-	
+	private MediaPlayer popSound;
+
 	private Paint mPaint = new Paint();
 	private Paint mPaintScore = new Paint();
+	private Paint mAlive = new Paint();
 	private Vibrator vibrator;
 
-	public Panel(Context context, Vibrator vibrator, MediaPlayer highscoreSound) {
+	public Panel(Context context, Vibrator vibrator,
+			MediaPlayer highscoreSound, MediaPlayer popSound) {
 		super(context);
 		this.vibrator = vibrator;
 		getHolder().addCallback(this);
 		mThread = new ViewThread(this);
 		mPaint.setColor(Color.WHITE);
 		mPaintScore.setColor(Color.YELLOW);
+		mAlive.setColor(Color.BLUE);
 		this.highScoreSound = highscoreSound;
+		this.popSound = popSound;
 		highScoreSound.setVolume(0.1f, 0.1f);
 
 	}
 
 	public void doDraw(long elapsed, Canvas canvas) {
-		Bitmap mBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.damp);
-		 canvas.drawBitmap(mBitmap, 0, 0, null);
-		 synchronized (mElements) {
+		Bitmap mBitmap = BitmapFactory.decodeResource(getResources(),
+				R.drawable.damp);
+		canvas.drawBitmap(mBitmap, 0, 0, null);
+		synchronized (mElements) {
 			for (Element element : mElements) {
 				checkForCrash(element);
 				element.doDraw(canvas);
 			}
 		}
-		canvas.drawText("FPS: " + Math.round(1000f / elapsed) + " Bubbles: "
-				+ mElementNumber + " Bursts: " + destroyedNumber, 10, 10,
-				mPaint);
-		mPaintScore.setTextSize(25);
-		canvas.drawText("HIGHSCORE: "+highScore,10,35,mPaintScore);
+		canvas.drawText("FPS: " + Math.round(1000f / elapsed), 10, 10, mPaint);
+		mPaintScore.setTextSize(20);
+		canvas.drawText("Alive: " + alive,200, 30, mAlive);
+		canvas.drawText("Highscore: " + highScore, 10, 30, mPaintScore);
+		
 	}
 
 	public boolean checkForCrash(Element element) {
-		if(!element.isDestroyed()){		
+		if (!element.isDestroyed()) {
 			for (Element other : mElements) {
 				if (element != other && element.isOccupyingSameSpace(other)
 						&& (!other.isDestroyed())) {
-					element.setDestroyed();
-					other.setDestroyed();
-					if(Settings.isVibration())vibrator.vibrate(500);
-					destroyedNumber = destroyedNumber +2;
+					destroy(element, other);
 					checkForHighScore();
-					
+
 					return true;
 				}
 			}
@@ -88,12 +89,24 @@ public class Panel extends SurfaceView implements SurfaceHolder.Callback {
 		return false;
 	}
 
+	private void destroy(Element element, Element other) {
+		element.setDestroyed();
+		other.setDestroyed();
+		dElements.add(element);
+		dElements.add(other);
+		if (Settings.isVibration())
+			vibrator.vibrate(500);
+		if (Settings.isSound())
+			popSound.start();
+	}
+
 	private void checkForHighScore() {
-		alive = mElementNumber - destroyedNumber;
-		if(alive>highScore){
+		if (alive > highScore) {
 			highScore = alive;
-			if(Settings.isSound())highScoreSound.start();
+			if (Settings.isSound())
+				highScoreSound.start();
 		}
+
 	}
 
 	@Override
@@ -108,7 +121,6 @@ public class Panel extends SurfaceView implements SurfaceHolder.Callback {
 		synchronized (mElements) {
 			mElements.add(new Element(getResources(), (int) event.getX(),
 					(int) event.getY()));
-			mElementNumber = mElements.size();
 		}
 		return super.onTouchEvent(event);
 	}
@@ -136,6 +148,15 @@ public class Panel extends SurfaceView implements SurfaceHolder.Callback {
 				element.animate(elapsedTime);
 			}
 		}
+	}
+
+	public void purgeDestroyed() {
+		synchronized (mElements) {
+			mElements.removeAll(dElements);
+			dElements.clear();
+			alive = mElements.size();
+		}
+
 	}
 
 }

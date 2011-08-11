@@ -29,10 +29,13 @@ public class ViewThread extends Thread {
 		while(mRun){
 			canvas = mHolder.lockCanvas();
 			if(canvas != null){
+				
 				mPanel.animate(mElapsed);
 				mPanel.doDraw(mElapsed, canvas);
 				mElapsed = System.currentTimeMillis() - mStartTime;
+				mPanel.purgeDestroyed();
 				mHolder.unlockCanvasAndPost(canvas);
+				
 			}
 			  mStartTime = System.currentTimeMillis();
 		}
