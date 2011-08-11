@@ -1,4 +1,4 @@
-package no.andsim.bubbles;
+package no.andsim.bubbles.model;
 
 public class Settings {
 	

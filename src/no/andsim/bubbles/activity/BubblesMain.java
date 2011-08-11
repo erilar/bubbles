@@ -1,4 +1,4 @@
-package no.andsim.bubbles;
+package no.andsim.bubbles.activity;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -21,7 +21,7 @@ public class BubblesMain extends Activity {
 						sleep(100);
 						logoTimer = logoTimer + 100;
 					}
-					startActivity(new Intent("no.andsim.bubbles.BUBBLEMENU"));
+					startActivity(new Intent("no.andsim.bubbles.activity.BUBBLEMENU"));
 				}
 				catch(InterruptedException e){
 					e.printStackTrace();

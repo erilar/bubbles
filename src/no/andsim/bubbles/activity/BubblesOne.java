@@ -1,5 +1,6 @@
-package no.andsim.bubbles;
+package no.andsim.bubbles.activity;
 
+import no.andsim.bubbles.view.Panel;
 import android.app.Activity;
 import android.content.Context;
 import android.media.MediaPlayer;

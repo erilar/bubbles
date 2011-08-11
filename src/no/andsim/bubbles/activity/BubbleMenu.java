@@ -1,5 +1,7 @@
-package no.andsim.bubbles;
+package no.andsim.bubbles.activity;
 
+
+import no.andsim.bubbles.model.Settings;
 import android.app.Activity;
 import android.content.Intent;
 import android.media.MediaPlayer;
@@ -23,7 +25,7 @@ public class BubbleMenu extends Activity {
 			
 			@Override
 			public void onClick(View v) {
-				startActivity(new Intent("no.andsim.bubbles.BUBBLESONE"));
+				startActivity(new Intent("no.andsim.bubbles.activity.BUBBLESONE"));
 				if(Settings.isSound())mpButtonClick.start();
 			}
 		});
@@ -33,7 +35,7 @@ public class BubbleMenu extends Activity {
 			
 			@Override
 			public void onClick(View v) {
-				startActivity(new Intent("no.andsim.bubbles.SETTINGSMENU"));
+				startActivity(new Intent("no.andsim.bubbles.activity.SETTINGSMENU"));
 				if(Settings.isSound())mpButtonClick.start();
 			}
 		});

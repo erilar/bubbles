@@ -1,5 +1,6 @@
-package no.andsim.bubbles;
+package no.andsim.bubbles.thread;
 
+import no.andsim.bubbles.view.Panel;
 import android.graphics.Canvas;
 import android.view.SurfaceHolder;
 

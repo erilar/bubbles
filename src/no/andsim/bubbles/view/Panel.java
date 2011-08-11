@@ -1,9 +1,13 @@
-package no.andsim.bubbles;
+package no.andsim.bubbles.view;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import no.andsim.bubbles.activity.R;
+import no.andsim.bubbles.model.Element;
+import no.andsim.bubbles.model.Settings;
+import no.andsim.bubbles.thread.ViewThread;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -50,7 +54,7 @@ public class Panel extends SurfaceView implements SurfaceHolder.Callback {
 
 	}
 
-	protected void doDraw(long elapsed, Canvas canvas) {
+	public void doDraw(long elapsed, Canvas canvas) {
 		Bitmap mBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.damp);
 		 canvas.drawBitmap(mBitmap, 0, 0, null);
 		 synchronized (mElements) {

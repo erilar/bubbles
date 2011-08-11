@@ -1,5 +1,7 @@
-package no.andsim.bubbles;
+package no.andsim.bubbles.listener;
 
+import no.andsim.bubbles.activity.R;
+import no.andsim.bubbles.model.Settings;
 import android.widget.RadioGroup;
 import android.widget.RadioGroup.OnCheckedChangeListener;
 

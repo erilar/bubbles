@@ -1,5 +1,7 @@
-package no.andsim.bubbles;
+package no.andsim.bubbles.activity;
 
+import no.andsim.bubbles.listener.OnOffRadioChangeListener;
+import no.andsim.bubbles.model.Settings;
 import android.app.Activity;
 import android.os.Bundle;
 import android.widget.RadioButton;

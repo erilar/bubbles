@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-	package="no.andsim.bubbles" android:versionCode="1"
+	package="no.andsim.bubbles.activity" android:versionCode="1"
 	android:versionName="1.0">
 	<uses-sdk android:minSdkVersion="8" />
 	<uses-permission android:name="android.permission.VIBRATE" />
@@ -12,21 +12,24 @@
 				<category android:name="android.intent.category.LAUNCHER" />
 			</intent-filter>
 		</activity>
-		<activity android:name=".BubbleMenu" android:label="@string/app_name" android:screenOrientation="portrait">
+		<activity android:name=".BubbleMenu" android:label="@string/app_name"
+			android:screenOrientation="portrait">
 			<intent-filter>
-				<action android:name="no.andsim.bubbles.BUBBLEMENU" />
+				<action android:name="no.andsim.bubbles.activity.BUBBLEMENU" />
 				<category android:name="android.intent.category.DEFAULT" />
 			</intent-filter>
 		</activity>
-		<activity android:name=".BubblesOne" android:label="@string/app_name" android:screenOrientation="portrait">
+		<activity android:name=".BubblesOne" android:label="@string/app_name"
+			android:screenOrientation="portrait">
 			<intent-filter>
-				<action android:name="no.andsim.bubbles.BUBBLESONE" />
+				<action android:name="no.andsim.bubbles.activity.BUBBLESONE" />
 				<category android:name="android.intent.category.DEFAULT" />
 			</intent-filter>
 		</activity>
-		<activity android:name=".SettingsMenu" android:label="@string/app_name" android:screenOrientation="portrait">
+		<activity android:name="no.andsim.bubbles.activity.controller.SettingsMenu"
+			android:label="@string/app_name" android:screenOrientation="portrait">
 			<intent-filter>
-				<action android:name="no.andsim.bubbles.SETTINGSMENU" />
+				<action android:name="no.andsim.bubbles.activity.SETTINGSMENU" />
 				<category android:name="android.intent.category.DEFAULT" />
 			</intent-filter>
 		</activity>

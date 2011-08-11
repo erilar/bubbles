@@ -1,9 +1,9 @@
-package no.andsim.bubbles;
+package no.andsim.bubbles.model;
 
 import java.util.Random;
 
-import no.andsim.bubbles.R;
-
+import no.andsim.bubbles.activity.R;
+import no.andsim.bubbles.view.Panel;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
