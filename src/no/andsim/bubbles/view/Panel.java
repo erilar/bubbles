@@ -15,9 +15,12 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.media.MediaPlayer;
 import android.os.Vibrator;
+import android.view.GestureDetector;
+import android.view.GestureDetector.SimpleOnGestureListener;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
+import android.view.View;
 
 public class Panel extends SurfaceView implements SurfaceHolder.Callback {
 
@@ -42,6 +45,9 @@ public class Panel extends SurfaceView implements SurfaceHolder.Callback {
 	private Paint mAlive = new Paint();
 	private Vibrator vibrator;
 
+	private GestureDetector gestureDetector;
+	View.OnTouchListener gestureListener;
+
 	public Panel(Context context, Vibrator vibrator,
 			MediaPlayer highscoreSound, MediaPlayer popSound) {
 		super(context);
@@ -55,6 +61,17 @@ public class Panel extends SurfaceView implements SurfaceHolder.Callback {
 		this.popSound = popSound;
 		highScoreSound.setVolume(0.1f, 0.1f);
 
+		gestureDetector = new GestureDetector(new MyGestureDetector());
+		gestureListener = new View.OnTouchListener() {
+			public boolean onTouch(View v, MotionEvent event) {
+				if (gestureDetector.onTouchEvent(event)) {
+					return true;
+				}
+				return false;
+			}
+		};
+		setOnTouchListener(gestureListener);
+
 	}
 
 	public void doDraw(long elapsed, Canvas canvas) {
@@ -67,11 +84,14 @@ public class Panel extends SurfaceView implements SurfaceHolder.Callback {
 				element.doDraw(canvas);
 			}
 		}
-		canvas.drawText("FPS: " + Math.round(1000f / elapsed), 10, 10, mPaint);
-		mPaintScore.setTextSize(20);
-		canvas.drawText("Alive: " + alive,200, 30, mAlive);
+		if (Settings.isDevmode())
+			canvas.drawText("FPS: " + Math.round(1000f / elapsed), 10, 10,
+					mPaint);
+		mPaintScore.setTextSize(30);
+		mAlive.setTextSize(30);
+		canvas.drawText("Alive: " + alive, 300, 30, mAlive);
 		canvas.drawText("Highscore: " + highScore, 10, 30, mPaintScore);
-		
+
 	}
 
 	public boolean checkForCrash(Element element) {
@@ -118,11 +138,7 @@ public class Panel extends SurfaceView implements SurfaceHolder.Callback {
 
 	@Override
 	public boolean onTouchEvent(MotionEvent event) {
-		synchronized (mElements) {
-			mElements.add(new Element(getResources(), (int) event.getX(),
-					(int) event.getY()));
-		}
-		return super.onTouchEvent(event);
+		return true;
 	}
 
 	@Override
@@ -155,6 +171,24 @@ public class Panel extends SurfaceView implements SurfaceHolder.Callback {
 			mElements.removeAll(dElements);
 			dElements.clear();
 			alive = mElements.size();
+		}
+
+	}
+
+	class MyGestureDetector extends SimpleOnGestureListener {
+		@Override
+		public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX,
+				float velocityY) {
+
+			try {
+				synchronized (mElements) {
+					mElements.add(new Element(getResources(), (int) e1
+							.getX(), (int) e1.getY(),(int)velocityX, (int)velocityY));
+				}
+			} catch (Exception e) {
+				// nothing
+			}
+			return false;
 		}
 
 	}

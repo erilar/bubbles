@@ -21,6 +21,8 @@ public class SettingsMenu extends Activity {
 		soundRadioGrp.setOnCheckedChangeListener(radioSettingListener);
 		RadioGroup vibrateRadioGrp = (RadioGroup) findViewById(R.id.groupVibrate);
 		vibrateRadioGrp.setOnCheckedChangeListener(radioSettingListener);
+		RadioGroup devRadioGrp = (RadioGroup) findViewById(R.id.groupDev);
+		devRadioGrp.setOnCheckedChangeListener(radioSettingListener);
 	}
 
 	private void setInitialState() {
@@ -36,6 +38,12 @@ public class SettingsMenu extends Activity {
 		if(Settings.isVibration())vibrateOn.setChecked(true);
 		RadioButton vibrateOff = (RadioButton) findViewById(R.id.vibrateOffRadio);
 		if(!Settings.isVibration())vibrateOff.setChecked(true);
+		
+		//Devmode
+		RadioButton devOn = (RadioButton) findViewById(R.id.devOnRadio);
+		if(Settings.isDevmode())devOn.setChecked(true);
+		RadioButton devOff = (RadioButton) findViewById(R.id.devOffRadio);
+		if(!Settings.isDevmode())devOff.setChecked(true);
 		
 		
 	}

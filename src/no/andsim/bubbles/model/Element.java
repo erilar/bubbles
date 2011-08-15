@@ -50,6 +50,23 @@ public class Element {
 		mSpeedX = rand.nextInt(7) - 3;
 		mSpeedY = rand.nextInt(7) - 3;
 	}
+	
+	public Element(Resources res, int x, int y, int speedX, int speedY) {
+		//Random rand = new Random();
+		mBitmap = BitmapFactory.decodeResource(res, R.drawable.bubble);
+		dBitmap = BitmapFactory.decodeResource(res, R.drawable.burst);
+		mX = x - mBitmap.getWidth() / 2;
+		mY = y - mBitmap.getHeight() / 2;
+
+		// offsets based on height (y axis) and width (x axis)
+		xPosOffset = mBitmap.getWidth() / 2;
+		xNegOffset = mBitmap.getWidth() / 2;
+		yPosOffset = mBitmap.getHeight() / 2;
+		yNegOffset = mBitmap.getHeight() / 2;
+
+		mSpeedX = speedX/100;
+		mSpeedY = speedY/100;
+	}
 
 	public void animate(Long elapsedTime) {
 		if (!isDestroyed()) {

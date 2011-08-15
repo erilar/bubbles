@@ -18,4 +18,12 @@
 		<RadioButton android:text="Vibration off" android:id="@+id/vibrateOffRadio"
 			android:layout_width="wrap_content" android:layout_height="wrap_content"></RadioButton>
 	</RadioGroup>
+	<RadioGroup android:orientation="horizontal"
+		android:layout_width="fill_parent" android:layout_height="50dp"
+		android:id="@+id/groupDev">
+		<RadioButton android:text="Dev mode on" android:id="@+id/devOnRadio"
+			android:layout_width="wrap_content" android:layout_height="wrap_content"></RadioButton>
+		<RadioButton android:text="Dev mode off" android:id="@+id/devOffRadio"
+			android:layout_width="wrap_content" android:layout_height="wrap_content"></RadioButton>
+	</RadioGroup>
 </LinearLayout>

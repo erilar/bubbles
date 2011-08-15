@@ -5,6 +5,7 @@ public class Settings {
 	private static boolean sound = true;
 	private static boolean music = true;
 	private static boolean vibration = true;
+	private static boolean devmode = false;
 	
 	public static boolean isSound() {
 		return sound;
@@ -23,6 +24,12 @@ public class Settings {
 	}
 	public static void setVibration(boolean vibration) {
 		Settings.vibration = vibration;
+	}
+	public static boolean isDevmode() {
+		return devmode;
+	}
+	public static void setDevmode(boolean devmode) {
+		Settings.devmode = devmode;
 	}
 
 }

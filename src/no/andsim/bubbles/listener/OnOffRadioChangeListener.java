@@ -22,6 +22,12 @@ public class OnOffRadioChangeListener implements OnCheckedChangeListener {
 		case R.id.vibrateOffRadio:
 			Settings.setVibration(false);
 			break;
+		case R.id.devOnRadio:
+			Settings.setDevmode(true);
+			break;
+		case R.id.devOffRadio:
+			Settings.setDevmode(false);
+			break;
 		}
 		
 	}
