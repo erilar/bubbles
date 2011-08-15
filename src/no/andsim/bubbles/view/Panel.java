@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import no.andsim.bubbles.activity.R;
+import no.andsim.bubbles.listener.BubblesOnTouchListener;
 import no.andsim.bubbles.model.Element;
 import no.andsim.bubbles.model.Settings;
 import no.andsim.bubbles.thread.ViewThread;
@@ -15,8 +16,6 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.media.MediaPlayer;
 import android.os.Vibrator;
-import android.view.GestureDetector;
-import android.view.GestureDetector.SimpleOnGestureListener;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
@@ -44,8 +43,7 @@ public class Panel extends SurfaceView implements SurfaceHolder.Callback {
 	private Paint mPaintScore = new Paint();
 	private Paint mAlive = new Paint();
 	private Vibrator vibrator;
-
-	private GestureDetector gestureDetector;
+	
 	View.OnTouchListener gestureListener;
 
 	public Panel(Context context, Vibrator vibrator,
@@ -61,15 +59,7 @@ public class Panel extends SurfaceView implements SurfaceHolder.Callback {
 		this.popSound = popSound;
 		highScoreSound.setVolume(0.1f, 0.1f);
 
-		gestureDetector = new GestureDetector(new MyGestureDetector());
-		gestureListener = new View.OnTouchListener() {
-			public boolean onTouch(View v, MotionEvent event) {
-				if (gestureDetector.onTouchEvent(event)) {
-					return true;
-				}
-				return false;
-			}
-		};
+		gestureListener = new BubblesOnTouchListener(this);
 		setOnTouchListener(gestureListener);
 
 	}
@@ -175,22 +165,12 @@ public class Panel extends SurfaceView implements SurfaceHolder.Callback {
 
 	}
 
-	class MyGestureDetector extends SimpleOnGestureListener {
-		@Override
-		public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX,
-				float velocityY) {
+	public void addElement(MotionEvent e1, float velocityX, float velocityY) {
+		synchronized (mElements) {
+			mElements.add(new Element(getResources(), (int) e1.getX(), (int) e1
+					.getY(), (int) velocityX, (int) velocityY));
 
-			try {
-				synchronized (mElements) {
-					mElements.add(new Element(getResources(), (int) e1
-							.getX(), (int) e1.getY(),(int)velocityX, (int)velocityY));
-				}
-			} catch (Exception e) {
-				// nothing
-			}
-			return false;
 		}
 
 	}
-
 }
