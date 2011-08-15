@@ -53,19 +53,27 @@ public class Panel extends SurfaceView implements SurfaceHolder.Callback {
 			MediaPlayer highscoreSound, MediaPlayer popSound) {
 		super(context);
 		this.vibrator = vibrator;
+		this.highScoreSound = highscoreSound;
+		this.popSound = popSound;
+		createResources(context);
+		setOnTouchListener(gestureListener);
+		initiValues();
+
+	}
+
+	private void createResources(Context context) {
 		getHolder().addCallback(this);
 		mThread = new ViewThread(this);
+		gestureListener = new BubblesOnTouchListener(this);
 		keyValueRepository = new KeyValueRepository(context);
+	}
+
+	private void initiValues() {
+		highScoreSound.setVolume(0.1f, 0.1f);
 		mPaint.setColor(Color.WHITE);
 		mPaintScore.setColor(Color.YELLOW);
 		mAlive.setColor(Color.BLUE);
-		this.highScoreSound = highscoreSound;
-		this.popSound = popSound;
-		highScoreSound.setVolume(0.1f, 0.1f);
 		highScore = keyValueRepository.getIntValue("highscore");
-		gestureListener = new BubblesOnTouchListener(this);
-		setOnTouchListener(gestureListener);
-
 	}
 
 	public void doDraw(long elapsed, Canvas canvas) {
