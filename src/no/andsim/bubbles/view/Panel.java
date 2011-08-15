@@ -5,11 +5,14 @@ import java.util.List;
 
 import no.andsim.bubbles.activity.R;
 import no.andsim.bubbles.listener.BubblesOnTouchListener;
+import no.andsim.bubbles.model.Difficulty;
 import no.andsim.bubbles.model.Element;
 import no.andsim.bubbles.model.Settings;
 import no.andsim.bubbles.persistence.KeyValueRepository;
 import no.andsim.bubbles.thread.ViewThread;
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -133,6 +136,7 @@ public class Panel extends SurfaceView implements SurfaceHolder.Callback {
 		if (alive > highScore) {
 			highScore = alive;
 			keyValueRepository.saveInt("highscore", highScore);
+			  if(highScore >= Difficulty.getLevelOneNormal())((Activity)getContext()).startActivity(new Intent("no.andsim.bubbles.activity.BUBBLEMENU"));
 			if (Settings.isSound())
 				highScoreSound.start();
 		}
