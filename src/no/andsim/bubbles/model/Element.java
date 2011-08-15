@@ -11,6 +11,7 @@ import android.graphics.Canvas;
 
 public class Element {
 
+	private static int speedDivider = 100;
 	private float mX;
 	private float mY;
 	private int mSpeedX;
@@ -64,8 +65,8 @@ public class Element {
 		yPosOffset = mBitmap.getHeight() / 2;
 		yNegOffset = mBitmap.getHeight() / 2;
 
-		mSpeedX = speedX/100;
-		mSpeedY = speedY/100;
+		mSpeedX = speedX/speedDivider;
+		mSpeedY = speedY/speedDivider;
 	}
 
 	public void animate(Long elapsedTime) {
@@ -132,6 +133,14 @@ public class Element {
 
 	private boolean checkForXAxisOverlap(int oX, int tX) {
 		return oX + xPosOffset >= tX && oX - xNegOffset <= tX;
+	}
+
+	public static int getSpeedDivider() {
+		return speedDivider;
+	}
+
+	public static void setSpeedDivider(int speedDivider) {
+		Element.speedDivider = speedDivider;
 	}
 
 	@Override

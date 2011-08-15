@@ -136,7 +136,7 @@ public class Panel extends SurfaceView implements SurfaceHolder.Callback {
 		if (alive > highScore) {
 			highScore = alive;
 			keyValueRepository.saveInt("highscore", highScore);
-			  if(highScore >= Difficulty.getLevelOneNormal())((Activity)getContext()).startActivity(new Intent("no.andsim.bubbles.activity.BUBBLEMENU"));
+			  if(highScore >= Difficulty.getLevelOneNormal())((Activity)getContext()).startActivity(new Intent("no.andsim.bubbles.activity.BUBBLESTWO"));
 			if (Settings.isSound())
 				highScoreSound.start();
 		}
