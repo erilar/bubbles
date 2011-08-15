@@ -7,6 +7,7 @@ import no.andsim.bubbles.activity.R;
 import no.andsim.bubbles.listener.BubblesOnTouchListener;
 import no.andsim.bubbles.model.Element;
 import no.andsim.bubbles.model.Settings;
+import no.andsim.bubbles.persistence.KeyValueRepository;
 import no.andsim.bubbles.thread.ViewThread;
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -45,6 +46,8 @@ public class Panel extends SurfaceView implements SurfaceHolder.Callback {
 	private Vibrator vibrator;
 	
 	View.OnTouchListener gestureListener;
+	
+	private KeyValueRepository keyValueRepository;
 
 	public Panel(Context context, Vibrator vibrator,
 			MediaPlayer highscoreSound, MediaPlayer popSound) {
@@ -52,13 +55,14 @@ public class Panel extends SurfaceView implements SurfaceHolder.Callback {
 		this.vibrator = vibrator;
 		getHolder().addCallback(this);
 		mThread = new ViewThread(this);
+		keyValueRepository = new KeyValueRepository(context);
 		mPaint.setColor(Color.WHITE);
 		mPaintScore.setColor(Color.YELLOW);
 		mAlive.setColor(Color.BLUE);
 		this.highScoreSound = highscoreSound;
 		this.popSound = popSound;
 		highScoreSound.setVolume(0.1f, 0.1f);
-
+		highScore = keyValueRepository.getIntValue("highscore");
 		gestureListener = new BubblesOnTouchListener(this);
 		setOnTouchListener(gestureListener);
 
@@ -68,12 +72,7 @@ public class Panel extends SurfaceView implements SurfaceHolder.Callback {
 		Bitmap mBitmap = BitmapFactory.decodeResource(getResources(),
 				R.drawable.damp);
 		canvas.drawBitmap(mBitmap, 0, 0, null);
-		synchronized (mElements) {
-			for (Element element : mElements) {
-				checkForCrash(element);
-				element.doDraw(canvas);
-			}
-		}
+		drawElementsOnCanvas(canvas);
 		if (Settings.isDevmode())
 			canvas.drawText("FPS: " + Math.round(1000f / elapsed), 10, 10,
 					mPaint);
@@ -82,6 +81,15 @@ public class Panel extends SurfaceView implements SurfaceHolder.Callback {
 		canvas.drawText("Alive: " + alive, 300, 30, mAlive);
 		canvas.drawText("Highscore: " + highScore, 10, 30, mPaintScore);
 
+	}
+
+	private void drawElementsOnCanvas(Canvas canvas) {
+		synchronized (mElements) {
+			for (Element element : mElements) {
+				checkForCrash(element);
+				element.doDraw(canvas);
+			}
+		}
 	}
 
 	public boolean checkForCrash(Element element) {
@@ -113,6 +121,7 @@ public class Panel extends SurfaceView implements SurfaceHolder.Callback {
 	private void checkForHighScore() {
 		if (alive > highScore) {
 			highScore = alive;
+			keyValueRepository.saveInt("highscore", highScore);
 			if (Settings.isSound())
 				highScoreSound.start();
 		}
