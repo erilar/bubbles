@@ -26,4 +26,7 @@
 		<RadioButton android:text="Dev mode off" android:id="@+id/devOffRadio"
 			android:layout_width="wrap_content" android:layout_height="wrap_content"></RadioButton>
 	</RadioGroup>
+	<Button android:layout_gravity="center_vertical" android:text="Reset Highscores"
+		android:id="@+id/clearHigh" android:layout_width="fill_parent"
+		android:layout_height="wrap_content"></Button>
 </LinearLayout>
