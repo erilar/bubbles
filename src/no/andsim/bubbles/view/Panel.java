@@ -69,10 +69,11 @@ public class Panel extends SurfaceView implements SurfaceHolder.Callback {
 	}
 
 	private void initiValues() {
-		highScoreSound.setVolume(0.1f, 0.1f);
 		mPaint.setColor(Color.WHITE);
 		mPaintScore.setColor(Color.YELLOW);
 		mAlive.setColor(Color.BLUE);
+		mPaintScore.setTextSize(30);
+		mAlive.setTextSize(30);
 		highScore = keyValueRepository.getIntValue("highscore");
 	}
 
@@ -81,14 +82,16 @@ public class Panel extends SurfaceView implements SurfaceHolder.Callback {
 				R.drawable.damp);
 		canvas.drawBitmap(mBitmap, 0, 0, null);
 		drawElementsOnCanvas(canvas);
+		drawTextOnCanvas(elapsed, canvas);
+
+	}
+
+	private void drawTextOnCanvas(long elapsed, Canvas canvas) {
 		if (Settings.isDevmode())
 			canvas.drawText("FPS: " + Math.round(1000f / elapsed), 10, 10,
 					mPaint);
-		mPaintScore.setTextSize(30);
-		mAlive.setTextSize(30);
 		canvas.drawText("Alive: " + alive, 300, 30, mAlive);
 		canvas.drawText("Highscore: " + highScore, 10, 30, mPaintScore);
-
 	}
 
 	private void drawElementsOnCanvas(Canvas canvas) {
