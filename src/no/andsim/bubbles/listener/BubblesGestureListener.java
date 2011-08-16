@@ -19,4 +19,16 @@ public class BubblesGestureListener extends SimpleOnGestureListener {
 		return false;
 	}
 
+	@Override
+	public boolean onSingleTapConfirmed(MotionEvent e) {
+		((Panel) view).addElement(e);
+		return super.onSingleTapConfirmed(e);
+	}
+
+	@Override
+	public boolean onDoubleTap(MotionEvent e) {
+		((Panel) view).addElement(e);
+		return super.onDoubleTap(e);
+	}
+
 }

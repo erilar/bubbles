@@ -207,4 +207,13 @@ public class Panel extends SurfaceView implements SurfaceHolder.Callback {
 		}
 
 	}
+
+	public void addElement(MotionEvent e1) {
+		synchronized (mElements) {
+			mElements.add(new Element(getResources(), (int) e1.getX(), (int) e1
+					.getY()));
+
+		}
+		
+	}
 }

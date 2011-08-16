@@ -1,6 +1,6 @@
 package no.andsim.bubbles.activity;
 
-import no.andsim.bubbles.thread.SplashThread;
+import no.andsim.bubbles.thread.TransitionThread;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,7 +14,7 @@ public class BubblesStart extends Activity {
     	requestWindowFeature(Window.FEATURE_NO_TITLE);
     	setContentView(R.layout.splash);
     	
-    	SplashThread logoSplash = new SplashThread(this,new Intent("no.andsim.bubbles.activity.BUBBLEMENU"),2000);
+    	TransitionThread logoSplash = new TransitionThread(this,new Intent("no.andsim.bubbles.activity.BUBBLEMENU"),2000);
     	logoSplash.start();
     	
     }

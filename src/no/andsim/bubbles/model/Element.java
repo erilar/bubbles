@@ -73,6 +73,27 @@ public class Element {
 		}
 	}
 
+	public Element(Resources res, int x, int y, long downTime) {
+		Random rand = new Random();
+		mBitmap = BitmapFactory.decodeResource(res, R.drawable.bubble);
+		dBitmap = BitmapFactory.decodeResource(res, R.drawable.burst);
+		int scaleMultiplier = (int)downTime / 1000000;
+		//dBitmap = Bitmap.createScaledBitmap(dBitmap,(int) ( dBitmap.getWidth()+(downTime/1000000)), (int)( dBitmap.getHeight()+(downTime/1000)), true);
+		mBitmap = Bitmap.createScaledBitmap(mBitmap,(int) ( mBitmap.getWidth()+scaleMultiplier), (int)( mBitmap.getHeight()+scaleMultiplier), true);
+		mX = x - mBitmap.getWidth() / 2;
+		mY = y - mBitmap.getHeight() / 2;
+
+		// offsets based on height (y axis) and width (x axis)
+		xPosOffset = mBitmap.getWidth() / 2;
+		xNegOffset = mBitmap.getWidth() / 2;
+		yPosOffset = mBitmap.getHeight() / 2;
+		yNegOffset = mBitmap.getHeight() / 2;
+
+		mSpeedX = rand.nextInt(7) - 3;
+		mSpeedY = rand.nextInt(7) - 3;
+	}
+
+
 	public void animate(Long elapsedTime) {
 		if (!isDestroyed()) {
 			mX += mSpeedX * (elapsedTime / 20f);

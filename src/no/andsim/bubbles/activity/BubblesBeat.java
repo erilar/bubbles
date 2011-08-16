@@ -1,6 +1,6 @@
 package no.andsim.bubbles.activity;
 
-import no.andsim.bubbles.thread.SplashThread;
+import no.andsim.bubbles.thread.TransitionThread;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,9 +11,9 @@ public class BubblesBeat extends Activity {
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.beat);
-		SplashThread beatSplash = new SplashThread(this, new Intent(
+		TransitionThread backToMenu = new TransitionThread(this, new Intent(
 				"no.andsim.bubbles.activity.BUBBLEMENU"), 1000);
-		beatSplash.start();
+		backToMenu.start();
 	}
 
 	@Override

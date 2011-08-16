@@ -3,13 +3,13 @@ package no.andsim.bubbles.thread;
 import android.app.Activity;
 import android.content.Intent;
 
-public class SplashThread extends Thread {
+public class TransitionThread extends Thread {
 	
 	private Activity creator;
 	private Intent nextActivity;
 	private int duration;
 	
-	public SplashThread(Activity creator, Intent nextActivity, int duration){
+	public TransitionThread(Activity creator, Intent nextActivity, int duration){
 		this.creator = creator;
 		this.nextActivity = nextActivity;
 		this.duration = duration;
