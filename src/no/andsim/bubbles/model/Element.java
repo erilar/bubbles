@@ -14,11 +14,11 @@ public class Element {
 	private static int speedDivider = 100;
 	private float mX;
 	private float mY;
-	private int mSpeedX;
-	private int mSpeedY;
+	private double mSpeedX;
+	private double mSpeedY;
 
-	private Bitmap mBitmap;
-	private Bitmap dBitmap;
+	private static Bitmap mBitmap;
+	private static Bitmap dBitmap;
 
 	private float dX;
 	private float dY;
@@ -37,8 +37,7 @@ public class Element {
 
 	public Element(Resources res, int x, int y) {
 		Random rand = new Random();
-		mBitmap = BitmapFactory.decodeResource(res, R.drawable.bubble);
-		dBitmap = BitmapFactory.decodeResource(res, R.drawable.burst);
+		setGraphics(res);
 		mX = x - mBitmap.getWidth() / 2;
 		mY = y - mBitmap.getHeight() / 2;
 
@@ -54,8 +53,7 @@ public class Element {
 	
 	public Element(Resources res, int x, int y, int speedX, int speedY) {
 		Random rand = new Random();
-		mBitmap = BitmapFactory.decodeResource(res, R.drawable.bubble);
-		dBitmap = BitmapFactory.decodeResource(res, R.drawable.burst);
+		setGraphics(res);
 		mX = x - mBitmap.getWidth() / 2;
 		mY = y - mBitmap.getHeight() / 2;
 
@@ -67,30 +65,15 @@ public class Element {
 
 		mSpeedX = speedX/speedDivider;
 		mSpeedY = speedY/speedDivider;
-		if(mSpeedX ==0 && mSpeedY == 0 ){
+		while(mSpeedX ==0 && mSpeedY == 0 ){
 			mSpeedX = rand.nextInt(7) - 3;
 			mSpeedY = rand.nextInt(7) - 3;
 		}
 	}
 
-	public Element(Resources res, int x, int y, long downTime) {
-		Random rand = new Random();
-		mBitmap = BitmapFactory.decodeResource(res, R.drawable.bubble);
-		dBitmap = BitmapFactory.decodeResource(res, R.drawable.burst);
-		int scaleMultiplier = (int)downTime / 1000000;
-		//dBitmap = Bitmap.createScaledBitmap(dBitmap,(int) ( dBitmap.getWidth()+(downTime/1000000)), (int)( dBitmap.getHeight()+(downTime/1000)), true);
-		mBitmap = Bitmap.createScaledBitmap(mBitmap,(int) ( mBitmap.getWidth()+scaleMultiplier), (int)( mBitmap.getHeight()+scaleMultiplier), true);
-		mX = x - mBitmap.getWidth() / 2;
-		mY = y - mBitmap.getHeight() / 2;
-
-		// offsets based on height (y axis) and width (x axis)
-		xPosOffset = mBitmap.getWidth() / 2;
-		xNegOffset = mBitmap.getWidth() / 2;
-		yPosOffset = mBitmap.getHeight() / 2;
-		yNegOffset = mBitmap.getHeight() / 2;
-
-		mSpeedX = rand.nextInt(7) - 3;
-		mSpeedY = rand.nextInt(7) - 3;
+	public static void setGraphics(Resources res) {
+		if(mBitmap == null) mBitmap = BitmapFactory.decodeResource(res, R.drawable.bubble);
+		if(dBitmap == null) dBitmap = BitmapFactory.decodeResource(res, R.drawable.burst);
 	}
 
 
@@ -168,60 +151,22 @@ public class Element {
 		Element.speedDivider = speedDivider;
 	}
 
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + Float.floatToIntBits(dX);
-		result = prime * result + Float.floatToIntBits(dY);
-		result = prime * result + (destroyed ? 1231 : 1237);
-		result = prime * result + mSpeedX;
-		result = prime * result + mSpeedY;
-		result = prime * result + Float.floatToIntBits(mX);
-		result = prime * result + Float.floatToIntBits(mY);
-		result = prime * result + Float.floatToIntBits(xNegOffset);
-		result = prime * result + Float.floatToIntBits(xPosOffset);
-		result = prime * result + Float.floatToIntBits(yNegOffset);
-		result = prime * result + Float.floatToIntBits(yPosOffset);
-		return result;
+	public double getmSpeedX() {
+		return mSpeedX;
 	}
 
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Element other = (Element) obj;
-		if (Float.floatToIntBits(dX) != Float.floatToIntBits(other.dX))
-			return false;
-		if (Float.floatToIntBits(dY) != Float.floatToIntBits(other.dY))
-			return false;
-		if (destroyed != other.destroyed)
-			return false;
-		if (mSpeedX != other.mSpeedX)
-			return false;
-		if (mSpeedY != other.mSpeedY)
-			return false;
-		if (Float.floatToIntBits(mX) != Float.floatToIntBits(other.mX))
-			return false;
-		if (Float.floatToIntBits(mY) != Float.floatToIntBits(other.mY))
-			return false;
-		if (Float.floatToIntBits(xNegOffset) != Float
-				.floatToIntBits(other.xNegOffset))
-			return false;
-		if (Float.floatToIntBits(xPosOffset) != Float
-				.floatToIntBits(other.xPosOffset))
-			return false;
-		if (Float.floatToIntBits(yNegOffset) != Float
-				.floatToIntBits(other.yNegOffset))
-			return false;
-		if (Float.floatToIntBits(yPosOffset) != Float
-				.floatToIntBits(other.yPosOffset))
-			return false;
-		return true;
+	public void setmSpeedX(double mSpeedX) {
+		this.mSpeedX = mSpeedX;
 	}
+
+	public double getmSpeedY() {
+		return mSpeedY;
+	}
+
+	public void setmSpeedY(double mSpeedY) {
+		this.mSpeedY = mSpeedY;
+	}
+
+	
 
 }

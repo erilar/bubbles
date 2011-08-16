@@ -1,7 +1,7 @@
 package no.andsim.bubbles.activity;
 
 import no.andsim.bubbles.model.Element;
-import no.andsim.bubbles.view.Panel;
+import no.andsim.bubbles.view.FanPanel;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -11,10 +11,9 @@ import android.os.Bundle;
 import android.os.Vibrator;
 import android.view.Window;
 
-public class BubblesTwo extends Activity{
-	
+public class BubblesThree extends Activity{
 	private final int levelGoal = 10;
-	private final Intent nextLevel = new Intent("no.andsim.bubbles.activity.BUBBLESTHREE");
+	private final Intent nextLevel = new Intent("no.andsim.bubbles.activity.BUBBLESBEAT");
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -25,15 +24,13 @@ public class BubblesTwo extends Activity{
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         Vibrator v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-        Panel panel = new Panel("bubbletwo",this,v,highscoreSound,popSound, BitmapFactory.decodeResource(getResources(),
-				R.drawable.damp2),levelGoal, nextLevel );
+        FanPanel panel = new FanPanel("bubbletwo",this,v,highscoreSound,popSound, BitmapFactory.decodeResource(getResources(),
+				R.drawable.blowing),levelGoal, nextLevel );
         setContentView(panel); 
 	}
 	@Override
 	public void onBackPressed() {
-		 startActivity( new Intent(
+		  startActivity( new Intent(
 					"no.andsim.bubbles.activity.BUBBLEMENU"));
 	}
-	
-
 }

@@ -24,9 +24,9 @@ import android.view.View;
 
 public class Panel extends SurfaceView implements SurfaceHolder.Callback {
 
-	private List<Element> mElements = new ArrayList<Element>();
+	protected List<Element> mElements = new ArrayList<Element>();
 
-	private List<Element> dElements = new ArrayList<Element>();
+	protected List<Element> dElements = new ArrayList<Element>();
 
 	private ViewThread mThread;
 
@@ -107,7 +107,7 @@ public class Panel extends SurfaceView implements SurfaceHolder.Callback {
 		canvas.drawText("Highscore: " + highScore, 10, 30, mPaintScore);
 	}
 
-	private void drawElementsOnCanvas(Canvas canvas) {
+	protected void drawElementsOnCanvas(Canvas canvas) {
 		synchronized (mElements) {
 			for (Element element : mElements) {
 				checkForCrash(element);
