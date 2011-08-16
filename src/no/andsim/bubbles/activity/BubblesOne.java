@@ -13,7 +13,7 @@ import android.view.Window;
 
 public class BubblesOne extends Activity {
 
-	private final int levelGoal = 4;
+	private final int levelGoal = 12;
 	private final Intent nextLevel = new Intent("no.andsim.bubbles.activity.BUBBLESTWO");
 	
 	@Override
@@ -28,6 +28,12 @@ public class BubblesOne extends Activity {
         Panel panel = new Panel("bubbleone",this,v,highscoreSound,popSound, BitmapFactory.decodeResource(getResources(),
 				R.drawable.damp), levelGoal, nextLevel);
         setContentView(panel); 
+	}
+	
+	@Override
+	public void onBackPressed() {
+		  startActivity( new Intent(
+				"no.andsim.bubbles.activity.BUBBLEMENU"));
 	}
 
 }

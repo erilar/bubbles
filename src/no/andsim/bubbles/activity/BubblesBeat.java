@@ -7,11 +7,18 @@ import android.os.Bundle;
 import android.view.Window;
 
 public class BubblesBeat extends Activity {
-	   public void onCreate(Bundle savedInstanceState) {
-	    	super.onCreate(savedInstanceState);
-	    	requestWindowFeature(Window.FEATURE_NO_TITLE);
-	    	setContentView(R.layout.beat);
-	    	SplashThread beatSplash = new SplashThread(this,new Intent("no.andsim.bubbles.activity.BUBBLEMENU"),2000);
-	    	beatSplash.start();
-	    }
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		requestWindowFeature(Window.FEATURE_NO_TITLE);
+		setContentView(R.layout.beat);
+		SplashThread beatSplash = new SplashThread(this, new Intent(
+				"no.andsim.bubbles.activity.BUBBLEMENU"), 1000);
+		beatSplash.start();
+	}
+
+	@Override
+	public void onBackPressed() {
+
+		return;
+	}
 }

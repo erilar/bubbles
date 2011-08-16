@@ -53,7 +53,7 @@ public class Element {
 	}
 	
 	public Element(Resources res, int x, int y, int speedX, int speedY) {
-		//Random rand = new Random();
+		Random rand = new Random();
 		mBitmap = BitmapFactory.decodeResource(res, R.drawable.bubble);
 		dBitmap = BitmapFactory.decodeResource(res, R.drawable.burst);
 		mX = x - mBitmap.getWidth() / 2;
@@ -67,6 +67,10 @@ public class Element {
 
 		mSpeedX = speedX/speedDivider;
 		mSpeedY = speedY/speedDivider;
+		if(mSpeedX ==0 && mSpeedY == 0 ){
+			mSpeedX = rand.nextInt(7) - 3;
+			mSpeedY = rand.nextInt(7) - 3;
+		}
 	}
 
 	public void animate(Long elapsedTime) {
