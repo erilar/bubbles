@@ -3,9 +3,7 @@ package no.andsim.bubbles.view;
 import java.util.ArrayList;
 import java.util.List;
 
-import no.andsim.bubbles.activity.R;
 import no.andsim.bubbles.listener.BubblesOnTouchListener;
-import no.andsim.bubbles.model.Difficulty;
 import no.andsim.bubbles.model.Element;
 import no.andsim.bubbles.model.Settings;
 import no.andsim.bubbles.persistence.KeyValueRepository;
@@ -14,7 +12,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -39,25 +36,36 @@ public class Panel extends SurfaceView implements SurfaceHolder.Callback {
 	private int alive = 0;
 
 	private int highScore = 0;
+	
+	private final String levelName;
+	
+	private int goal;
 
-	private MediaPlayer highScoreSound;
-	private MediaPlayer popSound;
+	private final MediaPlayer highScoreSound;
+	private final MediaPlayer popSound;
 
 	private Paint mPaint = new Paint();
 	private Paint mPaintScore = new Paint();
 	private Paint mAlive = new Paint();
-	private Vibrator vibrator;
+	private Paint mGoal = new Paint();
+	private final Vibrator vibrator;
+	private final Bitmap background;
+	private final Intent nextLevel;
 	
 	View.OnTouchListener gestureListener;
 	
 	private KeyValueRepository keyValueRepository;
 
-	public Panel(Context context, Vibrator vibrator,
-			MediaPlayer highscoreSound, MediaPlayer popSound) {
+	public Panel(final String levelName,final Context context,final Vibrator vibrator,
+			final MediaPlayer highscoreSound, final MediaPlayer popSound, final Bitmap background, final int goal, final Intent nextLevel) {
 		super(context);
+		this.levelName = levelName;
 		this.vibrator = vibrator;
+		this.background = background;
 		this.highScoreSound = highscoreSound;
 		this.popSound = popSound;
+		this.goal = goal;
+		this.nextLevel = nextLevel;
 		createResources(context);
 		setOnTouchListener(gestureListener);
 		initiValues();
@@ -73,17 +81,18 @@ public class Panel extends SurfaceView implements SurfaceHolder.Callback {
 
 	private void initiValues() {
 		mPaint.setColor(Color.WHITE);
+		mGoal.setColor(Color.BLUE);
+		mGoal.setTextSize(30);
 		mPaintScore.setColor(Color.YELLOW);
 		mAlive.setColor(Color.BLUE);
 		mPaintScore.setTextSize(30);
 		mAlive.setTextSize(30);
-		highScore = keyValueRepository.getIntValue("highscore");
+		highScore = keyValueRepository.getIntValue(levelName+"-highscore");
+		if(highScore > goal)goal = highScore;
 	}
 
 	public void doDraw(long elapsed, Canvas canvas) {
-		Bitmap mBitmap = BitmapFactory.decodeResource(getResources(),
-				R.drawable.damp);
-		canvas.drawBitmap(mBitmap, 0, 0, null);
+		canvas.drawBitmap(background, 0, 0, null);
 		drawElementsOnCanvas(canvas);
 		drawTextOnCanvas(elapsed, canvas);
 
@@ -93,7 +102,8 @@ public class Panel extends SurfaceView implements SurfaceHolder.Callback {
 		if (Settings.isDevmode())
 			canvas.drawText("FPS: " + Math.round(1000f / elapsed), 10, 10,
 					mPaint);
-		canvas.drawText("Alive: " + alive, 300, 30, mAlive);
+		canvas.drawText("Goal:" +goal, 300, 30, mGoal);
+		canvas.drawText("Alive: " + alive, 300, 60, mAlive);
 		canvas.drawText("Highscore: " + highScore, 10, 30, mPaintScore);
 	}
 
@@ -135,8 +145,8 @@ public class Panel extends SurfaceView implements SurfaceHolder.Callback {
 	private void checkForHighScore() {
 		if (alive > highScore) {
 			highScore = alive;
-			keyValueRepository.saveInt("highscore", highScore);
-			  if(highScore >= Difficulty.getLevelOneNormal())((Activity)getContext()).startActivity(new Intent("no.andsim.bubbles.activity.BUBBLESTWO"));
+			keyValueRepository.saveInt(levelName+"-highscore", highScore);
+			  if(highScore >= goal)((Activity)getContext()).startActivity(nextLevel);
 			if (Settings.isSound())
 				highScoreSound.start();
 		}

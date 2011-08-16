@@ -33,7 +33,8 @@ public class SettingsMenu extends Activity {
 
 			@Override
 			public void onClick(View v) {
-				keyValueRepository.saveInt("highscore", 0);
+				keyValueRepository.saveInt("bubbleone-highscore", 0);
+				keyValueRepository.saveInt("bubbletwo-highscore", 0);
 				
 			}
 		});

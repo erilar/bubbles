@@ -14,7 +14,7 @@ public class BubblesStart extends Activity {
     	requestWindowFeature(Window.FEATURE_NO_TITLE);
     	setContentView(R.layout.splash);
     	
-    	SplashThread logoSplash = new SplashThread(this,new Intent("no.andsim.bubbles.activity.BUBBLEMENU"),5000);
+    	SplashThread logoSplash = new SplashThread(this,new Intent("no.andsim.bubbles.activity.BUBBLEMENU"),2000);
     	logoSplash.start();
     	
     }
