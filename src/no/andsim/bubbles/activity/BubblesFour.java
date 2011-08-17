@@ -12,7 +12,7 @@ import android.os.Vibrator;
 import android.view.Window;
 
 public class BubblesFour extends Activity {
-	private final int levelGoal = 7;
+	private final int levelGoal = 10;
 	private final Intent nextLevel = new Intent("no.andsim.bubbles.activity.BUBBLESBEAT");
 	
 	@Override
@@ -24,7 +24,7 @@ public class BubblesFour extends Activity {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         Vibrator v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-        FanPanel panel = new FanPanel("bubbletwo",this,v,highscoreSound,popSound, BitmapFactory.decodeResource(getResources(),
+        FanPanel panel = new FanPanel("bubblefour",this,v,highscoreSound,popSound, BitmapFactory.decodeResource(getResources(),
 				R.drawable.hurricane),levelGoal, nextLevel );
         panel.setxSpeedMod(+0.3);
         panel.setMaxXSpeed(5);

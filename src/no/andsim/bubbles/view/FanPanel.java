@@ -28,9 +28,9 @@ public class FanPanel extends Panel {
 		synchronized (super.mElements) {
 			for (Element element : mElements) {
 				checkForCrash(element);
-				if(xSpeedMod != 0 && element.getmSpeedX()>-maxXSpeed)
+				if(xSpeedMod != 0 && element.getmSpeedX()<=maxXSpeed)
 					element.setmSpeedX(element.getmSpeedX()+xSpeedMod);
-				if(ySpeedMod != 0 && element.getmSpeedX()>-maxYSpeed)
+				if(ySpeedMod != 0 && element.getmSpeedX()<=maxYSpeed)
 					element.setmSpeedX(element.getmSpeedX()+ySpeedMod);
 				element.doDraw(canvas);
 			}
