@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="hello">Bubble Trouble</string>
-    <string name="app_name">Bubble Trouble</string>
+	<string name="hello">Bubble Trouble</string>
+	<string name="app_name">Bubble Trouble</string>
+	<color name="buttonStartColor">#4169e1</color>
+	<color name="buttonStopColor">#add8e6</color>
+	<color name="buttonStrokeColor">#4169e1</color>
+	<color name="focusedStartColor">#add8e6</color>
+	<color name="focusedStopColor">#e0ffff</color>
+	<color name="pressedStartColor">#4169e1</color>
+	<color name="pressedStopColor">#0000cd</color>
+	<color name="backgroundColor">#add8e6</color>
 </resources>
