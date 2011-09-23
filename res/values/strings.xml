@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-	<string name="hello">Bubble Trouble</string>
 	<string name="app_name">Bubble Trouble</string>
 	<color name="buttonStartColor">#4169e1</color>
 	<color name="buttonStopColor">#add8e6</color>
@@ -10,4 +9,5 @@
 	<color name="pressedStartColor">#4169e1</color>
 	<color name="pressedStopColor">#0000cd</color>
 	<color name="backgroundColor">#add8e6</color>
+	<color name="menuTextColor">#000080</color>
 </resources>

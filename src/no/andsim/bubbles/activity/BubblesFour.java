@@ -12,7 +12,7 @@ import android.os.Vibrator;
 import android.view.Window;
 
 public class BubblesFour extends Activity {
-	private final int levelGoal = 10;
+	private final int levelGoal = 8;
 	private final Intent nextLevel = new Intent("no.andsim.bubbles.activity.BUBBLESBEAT");
 	
 	@Override

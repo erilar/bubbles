@@ -1,32 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	android:orientation="vertical" android:layout_width="match_parent"
+	android:orientation="vertical" android:layout_width="match_parent" android:background="@drawable/sky"
 	android:layout_height="match_parent">
 	<RadioGroup android:orientation="horizontal"
 		android:layout_width="fill_parent" android:layout_height="50dp"
 		android:id="@+id/groupSound">
-		<RadioButton android:text="Sound on" android:id="@+id/soundOnRadio"
+		<RadioButton android:text="Sound on" android:id="@+id/soundOnRadio" android:textColor="@color/menuTextColor" android:typeface="serif"
 			android:layout_width="wrap_content" android:layout_height="wrap_content"></RadioButton>
-		<RadioButton android:text="Sound off" android:id="@+id/soundOffRadio"
+		<RadioButton android:text="Sound off" android:id="@+id/soundOffRadio" android:textColor="@color/menuTextColor" android:typeface="serif"
 			android:layout_width="wrap_content" android:layout_height="wrap_content"></RadioButton>
 	</RadioGroup>
 	<RadioGroup android:orientation="horizontal"
 		android:layout_width="fill_parent" android:layout_height="50dp"
 		android:id="@+id/groupVibrate">
-		<RadioButton android:text="Vibration on" android:id="@+id/vibrateOnRadio"
+		<RadioButton android:text="Vibration on" android:id="@+id/vibrateOnRadio" android:textColor="@color/menuTextColor" android:typeface="serif"
 			android:layout_width="wrap_content" android:layout_height="wrap_content"></RadioButton>
-		<RadioButton android:text="Vibration off" android:id="@+id/vibrateOffRadio"
+		<RadioButton android:text="Vibration off" android:id="@+id/vibrateOffRadio" android:textColor="@color/menuTextColor" android:typeface="serif"
 			android:layout_width="wrap_content" android:layout_height="wrap_content"></RadioButton>
 	</RadioGroup>
 	<RadioGroup android:orientation="horizontal"
 		android:layout_width="fill_parent" android:layout_height="50dp"
 		android:id="@+id/groupDev">
-		<RadioButton android:text="Dev mode on" android:id="@+id/devOnRadio"
+		<RadioButton android:text="Dev mode on" android:id="@+id/devOnRadio" android:textColor="@color/menuTextColor" android:typeface="serif"
 			android:layout_width="wrap_content" android:layout_height="wrap_content"></RadioButton>
-		<RadioButton android:text="Dev mode off" android:id="@+id/devOffRadio"
+		<RadioButton android:text="Dev mode off" android:id="@+id/devOffRadio" android:textColor="@color/menuTextColor" android:typeface="serif"
 			android:layout_width="wrap_content" android:layout_height="wrap_content"></RadioButton>
 	</RadioGroup>
-	<Button android:layout_gravity="center_vertical" android:text="Reset Highscores"
+	<Button android:text="Reset Highscores" android:textColor="@color/menuTextColor" android:typeface="serif"
 		android:id="@+id/clearHigh" android:layout_width="fill_parent"
-		android:layout_height="wrap_content"></Button>
+		android:layout_height="wrap_content" android:background="@drawable/menu_button" android:layout_margin="10dp" android:gravity="center_horizontal"></Button>
 </LinearLayout>
